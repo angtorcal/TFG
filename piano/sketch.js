@@ -1,6 +1,6 @@
 
 // las notas midi de una escala
-let notes = [ 60, 62, 64, 65, 67, 69, 71];
+let notes = [60, 62, 64, 65, 67, 69, 71];
 
 // para tocar la canción de forma automática
 let index = 0;
@@ -25,7 +25,7 @@ function setup() {
   let button = createButton("toca la canción automáticamente.");
   button.parent("instructions");
   // gatillar la reproducción automática
-  button.mousePressed(function() {
+  button.mousePressed(function () {
     if (!autoplay) {
       index = 0;
       autoplay = true;
@@ -33,7 +33,7 @@ function setup() {
   });
 
   // un oscilador de onda triangular
-  osc = new p5.TriOsc();
+  osc = new p5.Oscillator('triangle');
   // empezar en silencio
   osc.start();
   osc.amp(0);
@@ -43,25 +43,25 @@ function setup() {
 function playNote(note, duration) {
   osc.freq(midiToFreq(note));
   // aparición gradual
-  osc.fade(0.5,0.2);
+  osc.fade(0.5, 0.2);
 
   // si definimos una duración, apagar gradualmente
   if (duration) {
-    setTimeout(function() {
-      osc.fade(0,0.2);
-    }, duration-50);
+    setTimeout(function () {
+      osc.fade(0, 0.2);
+    }, duration - 50);
   }
 }
 
 function draw() {
 
   // Si estamos tocando automáticamente y es tiempo de tocar la siguiente nota
-  if (autoplay && millis() > trigger){
+  if (autoplay && millis() > trigger) {
     playNote(notes[song[index].note], song[index].duration);
     trigger = millis() + song[index].duration;
     // ir a la siguiente nota
-    index ++;
-  // cuando llegamos al final, dejar de tocar en automático
+    index++;
+    // cuando llegamos al final, dejar de tocar en automático
   } else if (index >= song.length) {
     autoplay = false;
   }
@@ -73,12 +73,13 @@ function draw() {
   let w = width / notes.length;
   for (let i = 0; i < notes.length; i++) {
     let x = i * w;
-    // si el ratón está sobre la tecla
+
+    // si el ratón está sobre la tecla 
     if (mouseX > x && mouseX < x + w && mouseY < height) {
-      // si estamos haciendo click
-      if (mouseIsPressed) {
-        fill(100,255,200);
-      // o solamente estamos sobre ella
+      // si estamos pulsando una tecla y el raton encima, se colorea
+      if (keyIsPressed) {
+        fill(100, 255, 200);
+        // o solamente estamos sobre ella
       } else {
         fill(127);
       }
@@ -87,26 +88,40 @@ function draw() {
     }
 
     // si estamos tocando la canción, resaltemos
-    if (autoplay && i === song[index-1].note) {
-      fill(100,255,200);
+    if (autoplay && i === song[index - 1].note) {
+      fill(100, 255, 200);
     }
 
     // dibujar la tecla
-    rect(x, 0, w-1, height-1);
+    rect(x, 0, w - 1, height - 1);
   }
 
 }
 
+// si pulsas la letra x de a,s,d,f,j,k,l
+function keyTyped() {
+  fill(200);
+  ls = ['a', 's', 'd', 'f', 'j', 'k', 'l']
+
+  if (key == ls[x]) {
+    fill(100, 255, 200);
+    playNote(notes[key])
+    // o solamente estamos sobre ella
+  } else {
+    fill(127);
+  }
+}
 // cuando hacemos click
-function mousePressed(event) {
-  if(event.button == 0 && event.clientX < width && event.clientY < height) {
+/*function mousePressed(event) {
+  if (event.button == 0 && event.clientX < width && event.clientY < height) {
     // mapear el ratón al índice de la tecla
     let key = floor(map(mouseX, 0, width, 0, notes.length));
     playNote(notes[key]);
   }
 }
+*/
 
 // Disminuye gradualmente cuando soltamos el botón del ratón
 function mouseReleased() {
-  osc.fade(0,0.5);
+  osc.fade(0, 0.5);
 }
