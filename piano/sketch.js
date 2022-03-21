@@ -19,11 +19,12 @@ let autoplay = false;
 let osc;
 
 function setup() {
-  createCanvas(720, 400);
+  createCanvas(900, 600);
   let div = createDiv("Haz click para tocar las notas")
   div.id("instructions");
   let button = createButton("toca la canción automáticamente.");
   button.parent("instructions");
+  
   // gatillar la reproducción automática
   button.mousePressed(function () {
     if (!autoplay) {
@@ -71,7 +72,31 @@ function draw() {
 
   // el ancho de cada tecla
   let w = width / notes.length;
+
+  let teclado=[{t:"a",x:0},{t:"s",x:0},{t:"d",x:0},{t:"f",x:0},{t:"j",x:0},{t:"k",x:0},{t:"l",x:0}]
   for (let i = 0; i < notes.length; i++) {
+    teclado[i].x= i*w;
+
+    if( key==teclado[i].t){
+      fill(100, 255, 200);
+      playNote(notes[key])
+        
+        // o solamente estamos sobre ella
+    }else{
+      fill(200);
+    }
+        // si estamos tocando la canción, resaltemos
+        if (autoplay && i === song[index - 1].note) {
+          fill(100, 255, 200);
+        }
+    
+        // dibujar la tecla
+        rect(x, 0, w - 1, height - 1);
+      }
+    }
+    
+
+/*for (let i = 0; i < notes.length; i++) {
     let x = i * w;
 
     // si el ratón está sobre la tecla 
@@ -96,7 +121,7 @@ function draw() {
     rect(x, 0, w - 1, height - 1);
   }
 
-}
+}*/
 
 // si pulsas la letra x de a,s,d,f,j,k,l
 function keyTyped() {
