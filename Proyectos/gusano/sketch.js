@@ -127,7 +127,8 @@ function comprobarFruta() {
     xCuerpo.unshift(xCuerpo[0]);
     yCuerpo.unshift(yCuerpo[0]);
     numeroSegmentos++;
-    actualizarCoordenadasFruta();
+    actualizarCoordenadasFruta(); 
+
   }
 }
 
