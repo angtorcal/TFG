@@ -15,10 +15,15 @@
     let izquierda
     let abajo
 
+    //variable sonido
+    const serpienteSound = new Audio("path/to/serpiente.mp3"); //juegoNuevo
+    const mordida = new Audio("path/to/mordida.mp3"); // for (const c of this.cola) {
+    const gameOver = new Audio("path/to/gameOver.mp3"); //juegoTerminado
+
     // variables de entorno html
     let canvas
 
-function setup() {
+  function setup() {
       frameRate(10)
       canvas = createCanvas(ANCHO_CANVAS, ALTO_CANVAS)
       windowResized()
@@ -28,6 +33,7 @@ function setup() {
       abajo = createVector(0, 1)
       derecha = createVector(1, 0)
       izquierda = createVector(-1, 0)
+     
     }
     //tamaño del canvas se ajustea la pantalla
       function windowResized() {

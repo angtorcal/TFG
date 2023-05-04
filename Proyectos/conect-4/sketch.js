@@ -10,6 +10,7 @@ let win = 0;
 
 function setup() {
   createCanvas(cols*w, rows*w + w);
+  
 }
 
 function hasWon() {
