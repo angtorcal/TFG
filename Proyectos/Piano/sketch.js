@@ -21,10 +21,14 @@ let autoplay = false;
 let osc;
 
 function setup() {
-  createCanvas(720, 400);
-  let div = createDiv("Presiona las teclas del teclado para tocar las notas");
+  createCanvas(800,900);
+  let div = createDiv("Presiona las teclas del teclado [ a s d f g h ] para tocar las notas");
+  div.style('font-size', '16px');
+  div.position(50, 400);
   div.id("instructions");
-  let button = createButton("toca la canción automáticamente.");
+  let button = createButton("Tocar la canción automáticamente");
+  button.position(0, 90);
+
   button.parent("instructions");
   // gatillar la reproducción automática
   button.mousePressed(function () {
