@@ -9,6 +9,8 @@ const ALTO_CANVAS = FILAS * LADO
 let serpiente
 let comida
 let contadorComida
+let textoInicio = true
+
 // variables de control
 let arriba
 let derecha
@@ -26,6 +28,7 @@ function preload() {
   serpienteSound = loadSound("libraries/serpiente.mp3");
   juegoTerminadoSound = loadSound("libraries/juegoTerminado.mp3");
   fondo = loadImage('libraries/fondo2.png');
+  myFont = loadFont('libraries/DeValencia.ttf');
 }
 
 function setup() {
@@ -38,27 +41,46 @@ function setup() {
   derecha = createVector(1, 0)
   izquierda = createVector(-1, 0)
   serpienteSound.play();
-  contadorComida =0;
+  contadorComida = 0;
 }
 
 function draw() {
+  textFont(myFont);
   background(fondo);
-  textSize(15);
-  fill(0, 31, 255);
+  textSize(20);
+  fill(129, 9, 171);
+  stroke(255);
   textAlign(RIGHT);
-  text("Contador: " + contadorComida,width-10, height-10);
+  text("Contador: " + contadorComida, width - 20, height - 20);
+  noStroke();
   serpiente.dibujar()
   fill('red');
   rect(comida.x * LADO, comida.y * LADO, LADO, LADO)
+  if (textoInicio) {
+    textAlign(CENTER, CENTER);
+    fill(12, 152, 255);
+    textSize(90);
+    stroke(255);
+    strokeWeight(5);
+    text("NUEVA PARTIDA", width / 2, (height / 2) - 40);
+    noStroke();
+    fill(255, 255, 255);
+    textSize(35);
+    textStyle(BOLD);
+    text("\nMueve las flechas \narriba - abajo - izquierda - derecha \npara moverte", width / 2, (height / 2) + 70);
+  }
   if (serpiente.posicion.dist(comida) == 0) {
     serpiente.tamaño++
     mordidaSound.play();
     contadorComida++
     posicionarComida()
-  } 
+  }
 }
 
 function keyPressed() {
+  if (textoInicio) {
+    textoInicio = !textoInicio;
+  }
   if (!isLooping()) {
     juegoNuevo()
   }
@@ -106,12 +128,18 @@ function juegoNuevo() {
 
 function juegoTerminado() {
   if (serpiente.sistemaDeChoques()) {
-    textAlign(CENTER, CENTER)
-    textSize(70)
+    textFont(myFont);
+    textAlign(CENTER, CENTER);
     fill(12, 152, 255);
+    textSize(90);
+    stroke(255);
+    strokeWeight(5);
     text("JUEGO TERMINADO", width / 2, height / 2)
-    textSize(35)
-    text("Puntuacion: "+ contadorComida, width / 2, (height / 2)+50)
+    noStroke();
+    fill(255, 255, 255);
+    textSize(50);
+    textStyle(BOLD);
+    text("Puntuacion: " + contadorComida, width / 2, (height / 2) + 90)
     juegoTerminadoSound.play();
     noLoop()
   }
@@ -140,7 +168,7 @@ function Serpiente() {
     return false
   }
   this.dibujar = function () {
-    fill(185, 253, 191)
+    fill(129, 9, 171)
     rect(
       constrain(this.posicion.x, 0, COLUMNAS - 1) * LADO,
       constrain(this.posicion.y, 0, FILAS - 1) * LADO,
