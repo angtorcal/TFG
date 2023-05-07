@@ -1,27 +1,27 @@
-const cols = 7;
-const rows = 6;
-const w = 100;
-const dw = 80;
-const board = Array(6).fill().map(() => Array(7).fill(0));
+const columnas = 7;
+const filas = 6;
+const anchoCelda = 100;
+const anchoCirculo = 80;
+const tablero = Array(6).fill().map(() => Array(7).fill(0));
 
-let player = 1;
-let playerPos;
-let win = 0;
+let jugador = 1;
+let posicionJugador;
+let victoria = 0;
 
 function setup() {
-  createCanvas(cols*w, rows*w + w);
+  createCanvas(columnas * anchoCelda, filas * anchoCelda + anchoCelda);
   
 }
 
-function hasWon() {
-  // Test Horizontal
-  for (let j = 0; j < rows; j++) {
-    for (let i = 0; i <= cols-4; i++) {
-      const test = board[j][i];
-      if (test != 0) {
+function haGanado() {
+  // Prueba horizontal
+  for (let j = 0; j < filas; j++) {
+    for (let i = 0; i <= columnas - 4; i++) {
+      const prueba = tablero[j][i];
+      if (prueba != 0) {
         let temp = true;
         for (let k = 0; k < 4; k++) {
-          if (board[j][i+k] !== test) {
+          if (tablero[j][i + k] !== prueba) {
             temp = false;
           }
         }
@@ -32,14 +32,14 @@ function hasWon() {
     }
   }
   
-  // Test Vertical
-  for (let j = 0; j <= rows-4; j++) {
-    for (let i = 0; i < cols; i++) {
-      const test = board[j][i];
-      if (test != 0) {
+  // Prueba vertical
+  for (let j = 0; j <= filas - 4; j++) {
+    for (let i = 0; i < columnas; i++) {
+      const prueba = tablero[j][i];
+      if (prueba != 0) {
         let temp = true;
         for (let k = 0; k < 4; k++) {
-          if (board[j+k][i] !== test) {
+          if (tablero[j + k][i] !== prueba) {
             temp = false;
           }
         }
@@ -50,14 +50,14 @@ function hasWon() {
     }
   }
   
-  // Test Diagonal
-  for (let j = 0; j <= rows-4; j++) {
-    for (let i = 0; i <= cols-4; i++) {
-      const test = board[j][i];
-      if (test != 0) {
+  // Prueba diagonal
+  for (let j = 0; j <= filas - 4; j++) {
+    for (let i = 0; i <= columnas - 4; i++) {
+      const prueba = tablero[j][i];
+      if (prueba != 0) {
         let temp = true;
         for (let k = 0; k < 4; k++) {
-          if (board[j+k][i+k] !== test) {
+          if (tablero[j + k][i + k] !== prueba) {
             temp = false;
           }
         }
@@ -68,14 +68,14 @@ function hasWon() {
     }
   }
   
-  // Test Antidiagonal
-  for (let j = 0; j <= rows-4; j++) {
-    for (let i = 4; i < cols; i++) {
-      const test = board[j][i];
-      if (test != 0) {
+  // Prueba antidiagonal
+  for (let j = 0; j <= filas - 4; j++) {
+    for (let i = 4; i < columnas; i++) {
+      const prueba = tablero[j][i];
+      if (prueba != 0) {
         let temp = true;
         for (let k = 0; k < 4; k++) {
-          if (board[j+k][i-k] !== test) {
+          if (tablero[j + k][i - k] !== prueba) {
             temp = false;
           }
         }
@@ -92,92 +92,91 @@ function hasWon() {
 function draw() {
   background(190, 229, 238);
   
-  playerPos = floor(mouseX/w)
+  posicionJugador = floor(mouseX / anchoCelda)
   
   stroke(0);
   fill(255);
-  rect(-1, -1, width+2, w);
-  for (let j = 0; j < rows; j++) {
-    for (let i = 0; i < cols; i++) {
+  rect(-1, -1, width + 2, anchoCelda);
+  for (let j = 0; j < filas; j++) {
+    for (let i = 0; i < columnas; i++) {
       fill(255);
-      if (board[j][i] == 1) {
+      if (tablero[j][i] == 1) {
         fill(150, 145, 237);
-      } else if (board[j][i] == 2) {
+      } else if (tablero[j][i] == 2) {
         fill(242, 172, 235);
       }
-      ellipse(i*w + w/2, j*w + 3*w/2, dw);
+      ellipse(i*anchoCelda + anchoCelda/2, j*anchoCelda + 3*anchoCelda/2, anchoCirculo);
     }
   }
   
   stroke(102, 102, 0);
-  for (let x = w; x < width; x += w) {
-    line(x, w, x, height);
+  for (let x = anchoCelda; x < width; x += anchoCelda) {
+    line(x, anchoCelda, x, height);
   }
   
   stroke(0);
-  if (player == 1) {
+  if (jugador == 1) {
     fill(150, 145, 237);
-  } else if (player  == 2) {
+  } else if (jugador  == 2) {
     fill(242, 172, 235);
   }
-  ellipse((playerPos + 0.5) * w, w/2, dw);
+  ellipse((posicionJugador + 0.5) * anchoCelda, anchoCelda/2, anchoCirculo);
   
-  if (win != 0) {
+  if (victoria != 0) {
     noStroke();
     fill(0);
-    if (win == 1) {
+    if (victoria == 1) {
       fill(150, 145, 237);
-    } else if (win  == 2) {
+    } else if (victoria  == 2) {
       fill(242, 172, 235);
     }
     textAlign(CENTER, CENTER);
     textSize(64);
-    if (win == 4) {
-      text("Game Over!", width/2, w/2);
-    } else if (win == 3) {
-      text("It is a tie.", width/2, w/2);
+    if (victoria == 4) {
+      text("¡Game Over!", width/2, anchoCelda/2);
+    } else if (victoria == 3) {
+      text("PARTIDO EMPATADO.", width/2, anchoCelda/2);
     } else {
-      text(`${win > 1 ? 'Pink' : 'Violet'} won!`, width/2, w/2);
+      text(`${victoria > 1 ? 'ROSA' : 'LILA'} WON!`, width/2, anchoCelda/2);
     }
     noLoop();
   }
 }
 
 function mousePressed() {
-  if (board[0][playerPos] != 0) {
-    win = 4;
+  if (tablero[0][posicionJugador] != 0) {
+    victoria = 4;
   }
   
-  board[0][playerPos] = player;
+  tablero[0][posicionJugador] = jugador;
   let i = 0;
   while (true) {
-    if (i >= rows-1) {
+    if (i >= filas-1) {
       break;
     }
-    if (board[i+1][playerPos] != 0) {
+    if (tablero[i+1][posicionJugador] != 0) {
       break;
     }
-    [board[i+1][playerPos], board[i][playerPos]] = [board[i][playerPos], board[i+1][playerPos]];
+    [tablero[i+1][posicionJugador], tablero[i][posicionJugador]] = [tablero[i][posicionJugador], tablero[i+1][posicionJugador]];
     i++;
   }
   
-  if (hasWon()) {
-    //console.log(`${player > 1 ? 'Red' : 'Blue'} won!`);
-    win = player;
+  if (haGanado()) {
+    victoria = jugador;
   }
   
-  let tie = true;
-  for (let j = 0; j < rows; j++) outer: {
-    for (let i = 0; i < cols; i++) {
-      if (board[j][i] == 0) {
-        tie = false;
+  let empate = true;
+  for (let j = 0; j < filas; j++) outer: {
+    for (let i = 0; i < columnas; i++) {
+      if (tablero[j][i] == 0) {
+        empate = false;
       }
     }
   }
   
-  if (tie) {
-    win = 3;
+  if (empate) {
+    victoria = 3;
   }
   
-  player = 3 - player;
+  jugador = 3 - jugador;
 }
