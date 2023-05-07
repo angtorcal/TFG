@@ -45,7 +45,8 @@ function draw() {
   background(fondo);
   textSize(15);
   fill(0, 31, 255);
-  text("Contador: " + contadorComida,5,13);
+  textAlign(RIGHT);
+  text("Contador: " + contadorComida,width-10, height-10);
   serpiente.dibujar()
   fill('red');
   rect(comida.x * LADO, comida.y * LADO, LADO, LADO)
