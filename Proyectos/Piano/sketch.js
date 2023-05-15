@@ -1,18 +1,26 @@
-// las notas midi de una escala
-let notes = [65, 83, 68, 70, 71, 72];  // CORRESPONDE TAMBIEN AL VALOR DE LAS TECLAS a,s,d,f,g,h
+/* las notas midi de una escala
+
+Do (C): 60
+Re (D): 62
+Mi (E): 64
+Fa (F): 65
+Sol (G): 67
+La (A): 69
+Si (B): 71*/
+let notes = [60, 62, 64, 65, 67, 69];
+let teclas = [65, 83, 68, 70, 71, 72];  // CORRESPONDE TAMBIEN AL VALOR DE LAS TECLAS a,s,d,f,g,h
 
 // para tocar la canción de forma automática
 let index = 0;
 
-let song = [
-  { note: 4, duration: 400 },
-  { note: 0, duration: 200 },
-  { note: 1, duration: 200 },
-  { note: 2, duration: 200 },
-  { note: 3, duration: 200 },
-  { note: 4, duration: 400 },
-  { note: 0, duration: 400 },
-  { note: 0, duration: 400 }
+let melody = [
+  { note: 0, duration: 500 },
+  { note: 2, duration: 250 },
+  { note: 4, duration: 250 },
+  { note: 0, duration: 500 },
+  { note: 4, duration: 250 },
+  { note: 5, duration: 250 },
+  { note: 4, duration: 500 }
 ];
 
 
@@ -20,17 +28,15 @@ let trigger = 0;
 let autoplay = false;
 let osc;
 
-function setup() {
-  createCanvas(800,900);
-  let div = createDiv("Presiona las teclas del teclado [ a s d f g h ] para tocar las notas");
-  div.style('font-size', '16px');
-  div.position(50, 400);
-  div.id("instructions");
-  let button = createButton("Tocar la canción automáticamente");
-  button.position(0, 90);
+function preload() {
+  myFont = loadFont('libraries/BRADHITC.TTF');//CHRISTMASDAY ITCEDSCR BRADHITC
+}
 
-  button.parent("instructions");
-  // gatillar la reproducción automática
+function setup() {
+  createCanvas(900, 600);
+  let button = createButton("Tocar la canción automáticamente");
+  button.position(875, 600);
+  //reproducción automática
   button.mousePressed(function () {
     if (!autoplay) {
       index = 0;
@@ -60,58 +66,59 @@ function playNote(note, duration) {
 }
 
 function draw() {
+  background(93, 19, 82);
   // Si estamos tocando automáticamente y es tiempo de tocar la siguiente nota
+
   if (autoplay && millis() > trigger) {
-    playNote(notes[song[index].note], song[index].duration);
-    trigger = millis() + song[index].duration;
+    playNote(notes[melody[index].note], melody[index].duration);
+    trigger = millis() + melody[index].duration;
     // ir a la siguiente nota
     index++;
     // cuando llegamos al final, dejar de tocar en automático
-    if (index >= song.length) {
+    if (index >= melody.length) {
       autoplay = false;
     }
   }
-
+  textFont(myFont);
+  fill(255);
+  textSize(60);
+  stroke(255);
+  text("P I A N O", (width / 2) + 80, height / 3);
+  noStroke();
+  fill(255, 139, 0 );
+  textSize(28);
+  text("Presiona las teclas \n[ a s d f g h ] \npara tocar las notas \n[DO, RE, MI, FA, SOL, LA] \n o pulsar el boton para reproducir \nla melodia automaticamente", (width / 2) + 50, height / 2);
   // dibujar un teclado
+
   // el ancho de cada tecla
-  let w = width / notes.length;
+  let w = (width / 2) / notes.length;
   for (let i = 0; i < notes.length; i++) {
     let x = i * w;
 
     // si estamos tocando esta tecla, resaltamos
-    if (keyIsDown(notes[i])) {
-      fill(100, 255, 200);
+    if (keyIsDown(teclas[i])) {
+      fill(236, 228, 207);
     } else {
-      fill(200);
+      fill(255, 248, 228);
     }
-    // dibujar la tecla
-    rect(x, 0, w - 1, height - 1);
 
     // si estamos tocando la canción, resaltemos
-    if (autoplay && i === song[index - 1].note) {
-      fill(100, 255, 200);
+    if (autoplay && i === melody[index - 1].note) {
+      fill(236, 228, 207);
     }
 
     // dibujar la tecla
     rect(x, 0, w - 1, height - 1);
 
   }
-  
+
 }
 
 function keyPressed() {
-  if (keyCode == 65) {
-    playNote(notes[0]);
-  } else if (keyCode == 68) {
-    playNote(notes[1]);
-  } else if (keyCode == 70) {
-    playNote(notes[2]);
-  } else if (keyCode == 71) {
-    playNote(notes[3]);
-  } else if (keyCode == 72) {
-    playNote(notes[4]);
-  } else if (keyCode == 83) {
-    playNote(notes[5]);
+  for (let i = 0; i < teclas.length; i++) {
+    if (keyCode == teclas[i]) {
+      playNote(notes[i]);
+    }
   }
 }
 
