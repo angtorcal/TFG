@@ -3,7 +3,8 @@ let speedX, speedY; // velocidad del círculo
 let myColour; // color del círculo
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(windowWidth, windowHeight);
+  //createCanvas(400, 400);
   x = width / 2;
   y = height / 2;
   speedX = 5;

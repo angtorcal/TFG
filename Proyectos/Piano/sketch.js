@@ -29,13 +29,13 @@ let autoplay = false;
 let osc;
 
 function preload() {
-  myFont = loadFont('libraries/BRADHITC.TTF');//CHRISTMASDAY ITCEDSCR BRADHITC
+  myFont = loadFont('libraries/BELL.TTF');//CHRISTMASDAY ITCEDSCR BRADHITC
 }
 
 function setup() {
-  createCanvas(900, 600);
-  let button = createButton("Tocar la canción automáticamente");
-  button.position(875, 600);
+  createCanvas(windowWidth, windowHeight);
+  let button = createButton("Tocar la melodía automáticamente");
+  button.position((width / 2) + 50, height / 2 + 200);
   //reproducción automática
   button.mousePressed(function () {
     if (!autoplay) {
@@ -66,7 +66,7 @@ function playNote(note, duration) {
 }
 
 function draw() {
-  background(93, 19, 82);
+  background(174, 90, 50);
   // Si estamos tocando automáticamente y es tiempo de tocar la siguiente nota
 
   if (autoplay && millis() > trigger) {
@@ -85,9 +85,8 @@ function draw() {
   stroke(255);
   text("P I A N O", (width / 2) + 80, height / 3);
   noStroke();
-  fill(255, 139, 0 );
   textSize(28);
-  text("Presiona las teclas \n[ a s d f g h ] \npara tocar las notas \n[DO, RE, MI, FA, SOL, LA] \n o pulsar el boton para reproducir \nla melodia automaticamente", (width / 2) + 50, height / 2);
+  text("Presiona las teclas [ a, s, d, f, g, h ] \npara tocar las notas \n[DO, RE, MI, FA, SOL, LA]. \n\n Pulsar el boton para reproducir \nla melodia automaticamente.", (width / 2) + 50, height / 2);
   // dibujar un teclado
 
   // el ancho de cada tecla
@@ -97,14 +96,14 @@ function draw() {
 
     // si estamos tocando esta tecla, resaltamos
     if (keyIsDown(teclas[i])) {
-      fill(236, 228, 207);
+      fill(186, 137, 109);
     } else {
-      fill(255, 248, 228);
+      fill(254, 226, 191);
     }
 
     // si estamos tocando la canción, resaltemos
     if (autoplay && i === melody[index - 1].note) {
-      fill(236, 228, 207);
+      fill(186, 137, 109);
     }
 
     // dibujar la tecla
