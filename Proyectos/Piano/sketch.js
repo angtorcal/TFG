@@ -141,3 +141,6 @@ function keyReleased() {
   osc.fade(0, 0.5);
 
 }
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}

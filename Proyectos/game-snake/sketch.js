@@ -33,7 +33,7 @@ function preload() {
 
 function setup() {
   frameRate(10)
-  canvas = createCanvas(ANCHO_CANVAS, ALTO_CANVAS)
+  createCanvas(windowWidth, windowHeight);
   serpiente = new Serpiente()
   posicionarComida()
   arriba = createVector(0, -1)
@@ -191,4 +191,7 @@ function Serpiente() {
     }
     this.posicion.add(this.aceleracion)
   }
+}
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
