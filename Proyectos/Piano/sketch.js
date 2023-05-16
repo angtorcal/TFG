@@ -36,6 +36,19 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   let button = createButton("Tocar la melodía automáticamente");
   button.position((width / 2) + 50, height / 2 + 200);
+  
+  // Cambiar el tamaño del botón
+   button.size(300, 50);
+  
+   // Cambiar el color del botón
+   button.style("background-color", " #5b8373"); // Cambia el color de fondo a rojo
+   button.style("color", "#ffffff"); // Cambia el color del texto a blanco
+   button.style("font-size", "15px"); // Cambia el tamaño de la fuente del texto
+   button.style("font-family", myFont); 
+   button.style("border-radius","10px");
+   button.style("cursor","pointer");
+
+   
   //reproducción automática
   button.mousePressed(function () {
     if (!autoplay) {
@@ -81,12 +94,15 @@ function draw() {
   }
   textFont(myFont);
   fill(255);
-  textSize(60);
+  // Ajustar el tamaño de la fuente en función del ancho de la ventana
+  let fontSize = width / 20;
+  textSize(fontSize);
   stroke(255);
   text("P I A N O", (width / 2) + 80, height / 3);
   noStroke();
-  textSize(28);
-  text("Presiona las teclas [ a, s, d, f, g, h ] \npara tocar las notas \n[DO, RE, MI, FA, SOL, LA]. \n\n Pulsar el boton para reproducir \nla melodia automaticamente.", (width / 2) + 50, height / 2);
+  fontSize = width / 80;
+  textSize(fontSize);
+  text("Presiona las teclas [ a, s, d, f, g, h ] \npara tocar las notas \n[ DO, RE, MI, FA, SOL, LA ].\n\n Pulsar el boton para reproducir \nla melodia automaticamente.", (width / 2) + 50, height / 2);
   // dibujar un teclado
 
   // el ancho de cada tecla
