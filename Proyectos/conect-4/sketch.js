@@ -176,6 +176,7 @@ function draw() {
     }
     noStroke();
     strokeWeight(0);
+    noLoop();
   }
 
 }
@@ -189,7 +190,7 @@ function keyPressed() {
       startTime = millis();
       spacePressed = true;
     }
-  }
+  } 
 }
 
 function mousePressed() {
