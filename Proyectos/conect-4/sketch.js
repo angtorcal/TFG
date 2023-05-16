@@ -176,7 +176,7 @@ function draw() {
     }
     noStroke();
     strokeWeight(0);
-    noLoop();
+        noLoop();
   }
 
 }
