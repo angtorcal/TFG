@@ -55,3 +55,10 @@
   text-align: center;
   padding: 20px;
 }
+#sketch h2, #serpiente h2 {
+  background-color: #f0245c; /* Cambia este valor por el color de fondo que desees */
+  color: #fff;
+  font-size: 1rem;
+  text-align: center;
+  padding: 25px; /* Añade un relleno alrededor del texto del encabezado */
+}
