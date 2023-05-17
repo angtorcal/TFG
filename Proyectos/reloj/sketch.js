@@ -1,5 +1,5 @@
 function setup() { 
-   createCanvas(400, 400);
+   createCanvas(windowWidth, windowHeight);
    angleMode(DEGREES);
 } 
 
@@ -8,45 +8,52 @@ function draw() {
    drawHoursOrb();
    drawMinutesOrb();
    drawSecondsOrb();
-   
    drawDigitalClock();
+}
+
+function preload() {
+   myFont = loadFont('libraries/GOUDYSTO.TTF'); // Ruta de la fuente de texto
 }
 
 function init() {
    background(17);
-   translate(200, 200);
+   translate(width / 2, height / 2); // Centra el reloj en el lienzo
    rotate(-90);
    noFill();
 }
 
 function drawSecondsOrb() {
    let endSecond = map(second(), 0, 60, 0, 360);
-   strokeWeight(9);
-   stroke(252, 68, 130);
-   arc(0, 0, 220, 220, 0, endSecond);
+   strokeWeight(18);
+   stroke(173, 255, 26); // Cambia el color de los segundos a verde (R: 150, G: 200, B: 50)
+   arc(0, 0, 400, 400, 0, endSecond);
 }
 
 function drawMinutesOrb() {
    let endMinute = map(minute(), 0, 60, 0, 360);
-   strokeWeight(11);
-   stroke(252, 214, 72);
-   arc(0, 0, 250, 250, 0, endMinute);
+   strokeWeight(22);
+   stroke(233, 27, 188); // Cambia el color de los minutos a magenta (R: 200, G: 100, B: 200)
+   arc(0, 0, 450, 450, 0, endMinute);
 }
 
 function drawHoursOrb() {
    let endHour = map(hour() % 12, 0, 12, 0, 360);
-   strokeWeight(15);
-   stroke(0, 180, 170);
-   arc(0, 0, 285, 285, 0, endHour);
+   strokeWeight(30);
+   stroke(0, 139, 255); // Cambia el color de las horas a azul (R: 100, G: 150, B: 200)
+   arc(0, 0, 570, 570, 0, endHour);
 }
 
-function drawDigitalClock()
-{
+function drawDigitalClock() {
    noStroke();
    rotate(90);
-   fill(120,120,120);
-   textSize(15);
-   text(formatTime(hour()) + ':' + formatTime(minute()) + ':' + formatTime(second()), -30, 5);
+   fill(255);
+   textAlign(LEFT);
+   textFont(myFont);
+   textSize(30);
+   let currentDate = day() + ' - ' + month() + ' - ' + year();
+   text(currentDate, -75, 10);
+   textAlign(CENTER);
+   text("\n"+formatTime(hour()) + ':' + formatTime(minute()) + ':' + formatTime(second()), -75, 40);
 }
 
 function formatTime(time) {

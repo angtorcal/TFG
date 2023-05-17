@@ -4,30 +4,29 @@ let myColour; // color del círculo
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  //createCanvas(400, 400);
   x = width / 2;
   y = height / 2;
   speedX = 5;
   speedY = 3;
-  myColour = color(random(255), random(255), random(255));
+  myColour = color(random(255),0, 255 );
 }
 
 function draw() {
   
-  background('#C2ECFF');
+  background(0, 139, 255);
   
   // mueve el círculo
-  x += speedX;
-  y += speedY;
+  x += speedX*2;
+  y += speedY*2;
   
   // cambia de dirección si llega al borde y cambia el color
   if (x > width || x < 0) {
     speedX *= -1;
-      myColour = color(random(255), random(255), random(255));
+      myColour = color(255, 0,random(255));
   }
   if (y > height || y < 0) {
     speedY *= -1;
-      myColour = color(random(255), random(255), random(255));
+      myColour = color(random(255), 255,0);
   }
   
   // calcula la distancia entre el mouse y el círculo
@@ -42,5 +41,5 @@ function draw() {
   
   // dibuja el círculo con el nuevo color
   fill(myColour);
-  ellipse(x, y, 50, 50);
+  ellipse(x, y, 90, 90);
 }
