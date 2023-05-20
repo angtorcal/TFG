@@ -10,7 +10,7 @@ let victoria = 0;
 
 let textoInicio = true;
 let spacePressed = false;
-let stopped= false;
+let stopped = false;
 let seconds;
 let startTime;
 let elapsedTime;
@@ -146,17 +146,19 @@ function draw() {
     noStroke();
   }
   if (!stopped) {
-  // calcular el tiempo transcurrido desde el inicio
-  elapsedTime = millis() - startTime;
-  // convertir el tiempo transcurrido a segundos
-  seconds = Math.floor(elapsedTime / 1000);
-  fill(12, 152, 255);
-  textSize(20);
-  textStyle(BOLD);
-  text(`${isNaN(seconds) ? 'TIEMPO: 0' : 'TIEMPO:' + seconds}`, 100, 30);
-}
+    // calcular el tiempo transcurrido desde el inicio
+    elapsedTime = millis() - startTime;
+    // convertir el tiempo transcurrido a segundos
+    seconds = Math.floor(elapsedTime / 1000);
+  }
+  if (spacePressed) {
+    fill(12, 152, 255);
+    textSize(20);
+    textStyle(BOLD);
+    text(`${isNaN(seconds) ? 'TIEMPO: 0' : 'TIEMPO:' + seconds}`, 100, 30);
+  }
   if (victoria != 0) {
-    stopped=true;
+    stopped = true;
     textAlign(CENTER, CENTER);
     textStyle(BOLD);
     stroke(255);
@@ -165,32 +167,36 @@ function draw() {
     textSize(30);
     if (victoria == 3) {
       text("PARTIDO EMPATADO!", width / 2, anchoCelda / 2);
+      fill(255, 0, 120);
+      textSize(20);
+      text("TIEMPO TOTAL: " + seconds, width / 2, (anchoCelda / 2) + 35);
     } else if (victoria == 4) {
       text("PARTIDO TERMINADO!", width / 2, anchoCelda / 2);
+      fill(255, 0, 120);
+      textSize(20);
+      text("TIEMPO TOTAL: " + seconds, width / 2, (anchoCelda / 2) + 35);
     } else {
       text(`${victoria > 1 ? 'JUGADOR AMARILLO' : 'JUGADOR ROJO'} GANADOR!`, width / 2, anchoCelda / 2)
       fill(255, 0, 120);
       textSize(20);
       text("TIEMPO TOTAL: " + seconds, width / 2, (anchoCelda / 2) + 35);
-
     }
     noStroke();
     strokeWeight(0);
-        noLoop();
+    noLoop();
   }
-
 }
 
 function keyPressed() {
-
   if (key === ' ') {
     if (textoInicio) {
       textoInicio = !textoInicio;
-      // iniciar el cronómetro al presionar la tecla de espacio
       startTime = millis();
       spacePressed = true;
+    } else if (victoria !== 0) {
+      resetGame(); // Reiniciar el juego si se presiona la tecla de espacio después de la victoria
     }
-  } 
+  }
 }
 
 function mousePressed() {
@@ -214,6 +220,7 @@ function mousePressed() {
 
     if (haGanado()) {
       victoria = jugador;
+      spacePressed = false;
     }
 
     let empate = true;
@@ -227,8 +234,24 @@ function mousePressed() {
 
     if (empate) {
       victoria = 3;
+      spacePressed = false;
     }
 
     jugador = 3 - jugador;
   }
+}
+
+function resetGame() {
+  tablero.forEach(row => row.fill(0)); // Reiniciar el tablero a ceros
+  jugador = 1; // Reiniciar el jugador actual
+  victoria = 0; // Reiniciar el estado de victoria
+  startTime = 0; // Reiniciar el tiempo de inicio
+  elapsedTime = 0; // Reiniciar el tiempo transcurrido
+  seconds = 0;
+  stopped = false; // Reiniciar el estado de detención del juego
+  textoInicio = true; // Mostrar el texto de inicio nuevamente
+  spacePressed = false; // Reiniciar el estado de la tecla de espacio
+
+  loop(); // Volver a habilitar el bucle de dibujo
+
 }
