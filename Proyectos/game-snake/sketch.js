@@ -125,6 +125,7 @@ function posicionarComida() {
 
 function juegoNuevo() {
   serpiente = new Serpiente()
+  serpienteSound.play();
   loop()
 }
 
