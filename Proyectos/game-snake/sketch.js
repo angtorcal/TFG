@@ -1,6 +1,6 @@
 // constantes de escenario
-const COLUMNAS = 40
-const FILAS = 30
+const COLUMNAS = 60
+const FILAS = 40
 const LADO = 20
 const ANCHO_CANVAS = COLUMNAS * LADO
 const ALTO_CANVAS = FILAS * LADO
@@ -33,7 +33,7 @@ function preload() {
 
 function setup() {
   frameRate(10)
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(ANCHO_CANVAS, ALTO_CANVAS);
   serpiente = new Serpiente()
   posicionarComida()
   arriba = createVector(0, -1)
@@ -82,6 +82,7 @@ function keyPressed() {
     textoInicio = !textoInicio;
   }
   if (!isLooping()) {
+    contadorComida=0;
     juegoNuevo()
   }
   switch (keyCode) {
@@ -191,7 +192,4 @@ function Serpiente() {
     }
     this.posicion.add(this.aceleracion)
   }
-}
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
 }
