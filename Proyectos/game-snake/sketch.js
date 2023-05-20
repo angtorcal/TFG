@@ -40,7 +40,6 @@ function setup() {
   abajo = createVector(0, 1)
   derecha = createVector(1, 0)
   izquierda = createVector(-1, 0)
-  serpienteSound.play();
   contadorComida = 0;
 }
 
@@ -80,6 +79,8 @@ function draw() {
 function keyPressed() {
   if (textoInicio) {
     textoInicio = !textoInicio;
+    serpienteSound.play();
+
   }
   if (!isLooping()) {
     contadorComida=0;
