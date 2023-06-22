@@ -24,11 +24,11 @@ let juegoTerminadoSound; //juegoTerminado
 let fondo;
 
 function preload() {
-  mordidaSound = loadSound("libraries/manzana.mp3");
-  serpienteSound = loadSound("libraries/serpiente.mp3");
-  juegoTerminadoSound = loadSound("libraries/juegoTerminado.mp3");
-  fondo = loadImage('libraries/fondo2.png');
-  myFont = loadFont('libraries/DeValencia.ttf');
+  mordidaSound = loadSound("asser/manzana.mp3");
+  serpienteSound = loadSound("asser/serpiente.mp3");
+  juegoTerminadoSound = loadSound("asser/juegoTerminado.mp3");
+  fondo = loadImage('asser/fondo2.png');
+  myFont = loadFont('asser/DeValencia.ttf');
 }
 
 function setup() {

@@ -29,7 +29,7 @@ let autoplay = false;
 let osc;
 
 function preload() {
-  myFont = loadFont('libraries/BELL.TTF');//CHRISTMASDAY ITCEDSCR BRADHITC
+  myFont = loadFont('asser/BELL.TTF');//CHRISTMASDAY ITCEDSCR BRADHITC
 }
 
 function setup() {
@@ -143,4 +143,7 @@ function keyReleased() {
 }
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+}
+function mouseClicked() {
+  window.location.reload(); // Recarga la página al hacer clic
 }

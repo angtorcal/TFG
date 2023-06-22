@@ -1,14 +1,31 @@
 let x, y; // posición del círculo
 let speedX, speedY; // velocidad del círculo
 let myColour; // color del círculo
-
+var colors = []; // Lista de colores
 function setup() {
   createCanvas(windowWidth, windowHeight);
   x = width / 2;
   y = height / 2;
   speedX = 5;
   speedY = 3;
-  myColour = color(random(255),0, 255 );
+  colors.push(color(255, 0, 0));        // Rojo
+  colors.push(color(0, 255, 0));        // Verde
+  colors.push(color(0, 0, 255));        // Azul
+  colors.push(color(255, 255, 0));      // Amarillo
+  colors.push(color(255, 0, 255));      // Magenta
+  colors.push(color(0, 255, 255));      // Cian
+  colors.push(color(255, 128, 0));      // Naranja
+  colors.push(color(128, 0, 255));      // Violeta
+  colors.push(color(255, 255, 255));    // Blanco
+  colors.push(color(0, 0, 0));          // Negro
+  colors.push(color(128, 128, 128));    // Gris
+  colors.push(color(128, 0, 0));        // Marrón
+  colors.push(color(0, 128, 0));        // Verde oscuro
+  colors.push(color(0, 0, 128));        // Azul oscuro
+  colors.push(color(128, 128, 0));      // Oliva
+  colors.push(color(128, 0, 128));      // Púrpura
+  colors.push(color(0, 128, 128));      // Turquesa
+  myColour=random(colors);
 }
 
 function draw() {
@@ -22,11 +39,11 @@ function draw() {
   // cambia de dirección si llega al borde y cambia el color
   if (x > width || x < 0) {
     speedX *= -1;
-      myColour = color(255, 0,random(255));
+    myColour=random(colors);
   }
   if (y > height || y < 0) {
     speedY *= -1;
-      myColour = color(random(255), 255,0);
+    myColour=random(colors);
   }
   
   // calcula la distancia entre el mouse y el círculo
