@@ -29,7 +29,7 @@ let autoplay = false;
 let osc;
 
 function preload() {
-  myFont = loadFont('asser/BELL.TTF');//CHRISTMASDAY ITCEDSCR BRADHITC
+  myFont = loadFont('assets/BELL.TTF');//CHRISTMASDAY ITCEDSCR BRADHITC
 }
 
 function setup() {

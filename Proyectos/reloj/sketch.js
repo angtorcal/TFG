@@ -12,7 +12,7 @@ function draw() {
 }
 
 function preload() {
-   myFont = loadFont('asser/GOUDYSTO.TTF'); // Ruta de la fuente de texto
+   myFont = loadFont('assets/GOUDYSTO.TTF'); // Ruta de la fuente de texto
 }
 
 function init() {
