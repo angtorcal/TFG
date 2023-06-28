@@ -5,7 +5,9 @@
   gap: 20px;
 }
 
-
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
 .project {
   border: 1px solid #ccc;
   padding: 20px;
@@ -29,9 +31,15 @@
 .header {
   background-color: #333;
   color: #fff;
-  font-size: 2rem;
-  text-align: center;
+  font-size: 4rem;
   padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+    padding-right: 40px; 
 }
 
 /* Estilos para la sección featured */
