@@ -27,7 +27,6 @@ let melody = [
 let trigger = 0;
 let autoplay = false;
 let osc;
-
 function preload() {
   myFont = loadFont('assets/BELL.TTF');//CHRISTMASDAY ITCEDSCR BRADHITC
 }
@@ -35,7 +34,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   let button = createButton("Tocar la melodía automáticamente");
-  button.position((width / 2) + 50, height / 2 + 200);
+  button.position((width / 2) + 35, height-85);
   
   // Cambiar el tamaño del botón
    button.size(300, 50);
@@ -81,7 +80,7 @@ function playNote(note, duration) {
 function draw() {
   background(174, 90, 50);
   // Si estamos tocando automáticamente y es tiempo de tocar la siguiente nota
-
+  
   if (autoplay && millis() > trigger) {
     playNote(notes[melody[index].note], melody[index].duration);
     trigger = millis() + melody[index].duration;
@@ -100,7 +99,7 @@ function draw() {
   stroke(255);
   text("P I A N O", (width / 2) + 80, height / 3);
   noStroke();
-  fontSize = width / 80;
+  fontSize = 20;
   textSize(fontSize);
   text("Presiona las teclas [ a, s, d, f, g, h ] \npara tocar las notas \n[ DO, RE, MI, FA, SOL, LA ].\n\n Pulsar el boton para reproducir \nla melodia automaticamente.", (width / 2) + 50, height / 2);
   // dibujar un teclado
@@ -126,7 +125,6 @@ function draw() {
     rect(x, 0, w - 1, height - 1);
 
   }
-
 }
 
 function keyPressed() {
@@ -143,7 +141,4 @@ function keyReleased() {
 }
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-}
-function mouseClicked() {
-  window.location.reload(); // Recarga la página al hacer clic
 }
